@@ -7,17 +7,20 @@ import Button from './Button'
 
 interface Props {
   onSubmitAction: (data: PensionInputs) => void
+  onClearData?: () => void
 }
 
-export default function PensionForm({ onSubmitAction }: Props) {
-  const [formData, setFormData] = useState<PensionInputs>({
+export default function PensionForm({ onSubmitAction, onClearData }: Props) {
+  const initialData: PensionInputs = {
     desiredIncome: 0,
     employerContribution: 0,
     personalContribution: 0,
     retirementAge: 0,
     startAge: 25,
     existingPots: [],
-  })
+  }
+
+  const [formData, setFormData] = useState<PensionInputs>(initialData)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -55,6 +58,11 @@ export default function PensionForm({ onSubmitAction }: Props) {
     }
 
     onSubmitAction(formData)
+  }
+
+  const handleClear = () => {
+    setFormData(initialData)
+    onClearData?.()
   }
 
   return (
@@ -137,6 +145,9 @@ export default function PensionForm({ onSubmitAction }: Props) {
       </div>
 
       <Button type="submit">Calculate</Button>
+      <Button type="button" onClick={handleClear}>
+        Clear
+      </Button>
     </form>
   )
 }
