@@ -17,7 +17,7 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h1 className="text-2xl font-bold">Pension Tracker</h1>
 
-        <PensionForm onSubmit={handleFormSubmit} />
+        <PensionForm onSubmitAction={handleFormSubmit} />
 
         {result && (
           <section className="p-4 rounded shadow max-w-md mx-auto">

@@ -10,6 +10,7 @@ export interface PensionProjection {
   requiredPot: number
   contributionsPerYear: number
   startAge?: number
+  existingPots?: number[]
 }
 
 export function calculatePension({
@@ -18,6 +19,7 @@ export function calculatePension({
   personalContribution,
   retirementAge,
   startAge = START_AGE,
+  existingPots = [],
 }: PensionInputs): PensionProjection {
   const yearsUntilRetirement = retirementAge - startAge
   const retirementYears = LIFE_EXPECTANCY - retirementAge
@@ -35,9 +37,12 @@ export function calculatePension({
     desiredIncome *
     ((1 - Math.pow(1 + INTEREST_RATE, -retirementYears)) / INTEREST_RATE)
 
+  const existingTotal = (existingPots || []).reduce((sum, val) => sum + val, 0)
+  const totalProjectedPot = projectedPot + existingTotal
+
   return {
     yearsUntilRetirement,
-    projectedPot,
+    projectedPot: totalProjectedPot,
     requiredPot,
     contributionsPerYear: annualContribution,
   }

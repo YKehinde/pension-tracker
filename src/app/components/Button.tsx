@@ -2,7 +2,7 @@ import React from 'react'
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode
-  variant?: 'primary' | 'secondary'
+  variant?: 'primary' | 'secondary' | 'remove' | 'add'
   type?: 'button' | 'submit' | 'reset'
 }
 
@@ -11,6 +11,8 @@ const baseStyles =
 const variants = {
   primary: 'bg-blue-600 text-white hover:bg-blue-700',
   secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
+  remove: 'text-red-500 hover:underline',
+  add: 'text-blue-600 hover:underline',
 }
 
 const Button: React.FC<ButtonProps> = ({

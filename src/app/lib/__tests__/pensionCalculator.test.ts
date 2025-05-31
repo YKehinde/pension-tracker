@@ -79,4 +79,26 @@ describe('calculatePension', () => {
     expect(result.yearsUntilRetirement).toBe(0)
     expect(result.projectedPot).toBe(0)
   })
+
+  it('includes existing pension pots in the projected pot', () => {
+    const inputWithPots = {
+      ...baseInput,
+      existingPots: [10000, 15000, 5000], // total = 30,000
+    }
+
+    const resultWithPots = calculatePension(inputWithPots)
+    const resultWithoutPots = calculatePension(baseInput)
+
+    expect(resultWithPots.projectedPot).toBeCloseTo(
+      resultWithoutPots.projectedPot + 30000,
+      -2, // allow rounding tolerance
+    )
+  })
+
+  it('treats empty existing pots as zero', () => {
+    const result = calculatePension({ ...baseInput, existingPots: [] })
+    const baseResult = calculatePension(baseInput)
+
+    expect(result.projectedPot).toBeCloseTo(baseResult.projectedPot, -2)
+  })
 })

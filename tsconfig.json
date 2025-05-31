@@ -21,6 +21,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      // the following paths are not currently working
       "@components/*": ["./src/app/components/*"],
       "@lib/*": ["./src/app/lib/*"],
       "@types/*": ["./src/app/types/*"]

@@ -29,4 +29,16 @@ describe('Button', () => {
     const button = screen.getByRole('button', { name: /submit/i })
     expect(button).toHaveAttribute('type', 'submit')
   })
+
+  it('renders with "remove" variant styles', () => {
+    render(<Button variant="remove">Delete</Button>)
+    const button = screen.getByRole('button', { name: /delete/i })
+    expect(button).toHaveClass('text-red-500')
+  })
+
+  it('renders with "add" variant styles', () => {
+    render(<Button variant="add">Add</Button>)
+    const button = screen.getByRole('button', { name: /add/i })
+    expect(button).toHaveClass('text-blue-600')
+  })
 })
