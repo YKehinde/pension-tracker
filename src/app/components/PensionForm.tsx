@@ -15,6 +15,7 @@ export default function PensionForm({ onSubmit }: Props) {
     employerContribution: 0,
     personalContribution: 0,
     retirementAge: 0,
+    startAge: 25, // Default start age
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +36,10 @@ export default function PensionForm({ onSubmit }: Props) {
       onSubmit={handleSubmit}
       className="space-y-4 p-4 rounded shadow-md max-w-md mx-auto"
     >
-      <h2 className="text-xl font-semibold">Pension Setup</h2>
+      <h2 className="text-xl font-semibold">
+        Pension Setup
+        <span className="block text-sm"> * required fields</span>
+      </h2>
 
       <TextInput
         label="Desired Retirement Income (£/year)"
@@ -67,6 +71,16 @@ export default function PensionForm({ onSubmit }: Props) {
         name="retirementAge"
         value={formData.retirementAge}
         onChange={handleChange}
+      />
+
+      <TextInput
+        label="Start Age"
+        type="number"
+        name="startAge"
+        value={formData.startAge}
+        onChange={handleChange}
+        required={false} // Optional field
+        placeholder="Default is 25"
       />
 
       <Button type="submit">Calculate</Button>

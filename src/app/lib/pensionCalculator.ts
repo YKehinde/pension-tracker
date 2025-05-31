@@ -9,6 +9,7 @@ export interface PensionProjection {
   projectedPot: number
   requiredPot: number
   contributionsPerYear: number
+  startAge?: number
 }
 
 export function calculatePension({
@@ -16,8 +17,9 @@ export function calculatePension({
   employerContribution,
   personalContribution,
   retirementAge,
+  startAge = START_AGE,
 }: PensionInputs): PensionProjection {
-  const yearsUntilRetirement = retirementAge - START_AGE
+  const yearsUntilRetirement = retirementAge - startAge
   const retirementYears = LIFE_EXPECTANCY - retirementAge
   const totalMonthlyContribution = employerContribution + personalContribution
   const annualContribution = totalMonthlyContribution * 12

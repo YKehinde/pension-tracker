@@ -3,4 +3,5 @@ export interface PensionInputs {
   employerContribution: number
   personalContribution: number
   retirementAge: number
+  startAge?: number
 }
