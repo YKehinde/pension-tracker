@@ -48,6 +48,12 @@ export default function PensionForm({ onSubmitAction }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    // Validate required fields
+    if (formData.desiredIncome <= 0 || formData.retirementAge <= 0) {
+      alert('Please fill in all required fields.')
+      return
+    }
+
     onSubmitAction(formData)
   }
 

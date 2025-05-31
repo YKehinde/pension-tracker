@@ -111,6 +111,19 @@ describe('PensionForm', () => {
   it('includes existing pots in submitted form data', () => {
     render(<PensionForm onSubmitAction={onSubmitAction} />)
 
+    fireEvent.change(screen.getByLabelText(/Desired Retirement Income/i), {
+      target: { value: '20000' },
+    })
+    fireEvent.change(screen.getByLabelText(/Employer Monthly Contribution/i), {
+      target: { value: '300' },
+    })
+    fireEvent.change(screen.getByLabelText(/Personal Monthly Contribution/i), {
+      target: { value: '250' },
+    })
+    fireEvent.change(screen.getByLabelText(/retirement age/i), {
+      target: { value: '65' },
+    })
+
     const addButton = screen.getByRole('button', {
       name: /\+ Add Pension Pot/i,
     })
